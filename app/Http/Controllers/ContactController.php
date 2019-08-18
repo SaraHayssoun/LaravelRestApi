@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ContactController extends Controller
 {
@@ -60,5 +61,16 @@ class ContactController extends Controller
         $contact->save();
 
         return Response::json($contact);
+    }
+
+    public function destroy(Contact $contact)
+    {
+        if ($contact->delete()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+
+        }
+
     }
 }
